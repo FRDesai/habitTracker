@@ -8,6 +8,7 @@ export const HabitCard = ({ habit, onToggle, onClick, isDarkMode }) => {
   const completionSet = new Set(habit.completionDates || []);
   const isCheckedToday = completionSet.has(todayStr);
 
+  console.log("Habit", habit)
   // === Calculate current streak ===
   let currentStreak = 0;
   let dateCursor = endOfToday();
@@ -17,7 +18,7 @@ export const HabitCard = ({ habit, onToggle, onClick, isDarkMode }) => {
     dateCursor = subDays(dateCursor, 1);
   }
 
-  const { title, color } = getLevelInfo(currentStreak);
+  const { title, color } = getLevelInfo(habit.completionDates.length);
 
   return (
     <motion.div
@@ -36,12 +37,13 @@ export const HabitCard = ({ habit, onToggle, onClick, isDarkMode }) => {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-xl font-semibold mb-2">{habit.name}</h3>
-          <p className={`text-sm ${color}`}>{title}</p>
+          <p className={`text-sm ${color}`}>{title} </p>
           <p className="text-sm mt-1">
             Current streak: <span className="font-bold">
               {currentStreak} day{currentStreak !== 1 && 's'} {currentStreak > 3 && '🔥'}
             </span>
           </p>
+
         </div>
         <motion.button
           whileTap={{ scale: 0.95 }}

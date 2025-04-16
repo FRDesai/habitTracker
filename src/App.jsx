@@ -11,6 +11,33 @@ function App() {
   const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
 
+  function logDatesBetween(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+  
+    // Check if start date is before end date
+    if (start > end) {
+      console.log('Start date should be earlier than end date.');
+      return;
+    }
+  
+    // Initialize an array to collect the dates
+    const dates = [];
+  
+    // Loop through each day between start date and end date
+    let currentDate = start;
+    while (currentDate <= end) {
+      dates.push(currentDate.toISOString().split('T')[0]); // Add date in YYYY-MM-DD format to the array
+      currentDate.setDate(currentDate.getDate() + 1); // Increment the current date by 1 day
+    }
+  
+    // Log the array of dates
+    console.log(dates);
+  }
+  
+  // Example usage
+  logDatesBetween('2025-01-01', '2025-04-16');
+
   return (
     <div
       className={`min-h-screen transition-colors duration-200 ${
