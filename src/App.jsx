@@ -99,6 +99,7 @@ function App() {
                   key={habit.id}
                   habit={habit}
                   onClick={() => setSelectedHabit(habit)}
+                  onToggle={()=>toggleHabit(habit.id)}
                   isDarkMode={darkMode}
                 />
               ))}

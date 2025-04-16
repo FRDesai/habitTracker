@@ -574,6 +574,7 @@ export const useStore = create((set) => ({
     set((state) => ({ habits: [...state.habits, newHabit] }));
   },
   toggleHabit: (id) => {
+    console.log("On toggle is clciked" )
     const today = new Date().toISOString().split('T')[0];
 
     set((state) => ({
