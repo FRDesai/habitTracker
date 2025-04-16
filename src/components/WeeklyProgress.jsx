@@ -33,11 +33,12 @@ export const WeeklyProgress = ({ isDarkMode }) => {
   });
 
   return (
-    <div className="flex justify-between gap-2  my-6 overflow">
+    <div className="my-6">
+    <div className="grid grid-cols-3 sm:grid-cols-7 gap-4 overflow-x-auto px-1">
       {last7Days.map(({ dayName, percentage }, idx) => (
         <div
           key={idx}
-          className={`flex flex-col items-center p-2 rounded-full w-16 h-20 transition-transform duration-200 will-change-transform
+          className={`flex flex-col items-center p-2 rounded-full w-full h-20 transition-transform duration-200
           ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'}
           shadow-md hover:shadow-lg hover:scale-105 cursor-pointer`}
         >
@@ -56,6 +57,8 @@ export const WeeklyProgress = ({ isDarkMode }) => {
         </div>
       ))}
     </div>
+  </div>
+  
 
 
   );
