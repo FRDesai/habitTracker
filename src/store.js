@@ -123,7 +123,7 @@ export const useStore = create((set) => ({
       name: 'Morning Run',
       lastChecked: null,
       createdAt: new Date().toISOString(),
-      reminderTime: '07:00',
+      reminderTime: '22:38',
       completionDates: [
         "2025-01-01",
         "2025-01-03",
@@ -549,6 +549,15 @@ export const useStore = create((set) => ({
 
 
       ],
+    },
+
+    {
+      id: '6',
+      name: 'Go Swimming',
+      lastChecked: null,
+      createdAt: '2025-04-16T00:00:00.000Z',
+      reminderTime: '07:00',
+      completionDates: [],
     },
   ],
   darkMode: true,
