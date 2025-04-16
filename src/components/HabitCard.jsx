@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle2, Circle } from 'lucide-react';
 import { getLevelInfo } from '../types';
 
-export const HabitCard = ({ habit, onToggle, isDarkMode }) => {
+export const HabitCard = ({ habit, onToggle, onClick, isDarkMode }) => {
   const { title, color } = getLevelInfo(habit.streak);
   const isCheckedToday = habit.lastChecked?.split('T')[0] === new Date().toISOString().split('T')[0];
 
@@ -13,13 +13,10 @@ export const HabitCard = ({ habit, onToggle, isDarkMode }) => {
       whileHover={{
         y: -1,
         scale: 1.01,
-        // boxShadow: isDarkMode
-        //   ? '0 0 15px rgba(255, 255, 255, 0.1)'
-        //   : '0 4px 20px rgba(0, 0, 0, 0.1)',
         transition: { duration: 0.2 },
       }}
-      className={`p-6 rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-        } transition-colors duration-200`}
+      className={`p-6 rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} transition-colors duration-200`}
+      onClick={onClick}  // Handle click event to show heatmap
     >
       <div className="flex items-center justify-between">
         <div>
@@ -33,7 +30,10 @@ export const HabitCard = ({ habit, onToggle, isDarkMode }) => {
         </div>
         <motion.button
           whileTap={{ scale: 0.95 }}
-          onClick={onToggle}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent click on button from triggering habit card click
+            onToggle();
+          }}
           className="text-2xl focus:outline-none"
         >
           {isCheckedToday ? (
