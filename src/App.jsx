@@ -10,11 +10,11 @@ import ReminderModal from './components/ReminderModal';
 import { format } from 'date-fns';
 
 function App() {
-  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit } = useStore();
+  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit, selectedDate, setSelectedDate } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
 
   const [showReminder, setShowReminder] = useState(true);
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  
 
   useEffect(() => {
     const checkTime = () => {

@@ -13,8 +13,6 @@ export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode , sel
       ? habit.completionDates.includes(selectedDate)
       : habit.completionDates.includes(format(new Date(), 'yyyy-MM-dd'));
 
-
-
   // === Calculate current streak ===
   let currentStreak = 0;
   let dateCursor = endOfToday();

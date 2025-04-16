@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { format } from 'date-fns';
+
 
 export const useStore = create((set) => ({
   habits: [
@@ -504,6 +506,9 @@ export const useStore = create((set) => ({
       completionDates: [      '2025-04-16',],
     },
   ],
+  selectedDate: format(new Date(), 'yyyy-MM-dd'),
+
+  setSelectedDate: (date) => set(() => ({ selectedDate: date })),
   darkMode: true,
   addHabit: (name) => {
     const newHabit = {
@@ -518,31 +523,35 @@ export const useStore = create((set) => ({
     set((state) => ({ habits: [...state.habits, newHabit] }));
   },
   toggleHabit: (id) => {
-    const today = new Date().toISOString().split('T')[0];
+    set((state) => {
+      const selectedDate = state.selectedDate;
 
-    set((state) => ({
-      habits: state.habits.map((habit) => {
-        if (habit.id !== id) return habit;
+      return {
+        habits: state.habits.map((habit) => {
+          if (habit.id !== id) return habit;
 
-        const lastChecked = habit.lastChecked?.split('T')[0];
+          const alreadyCompleted = habit.completionDates.includes(selectedDate);
 
-        if (!habit.lastChecked || lastChecked !== today) {
-          return {
-            ...habit,
-            streak: habit.streak + 1,
-            lastChecked: new Date().toISOString(),
-            completionDates: [...habit.completionDates, today],
-          };
-        }
-
-        return {
-          ...habit,
-          streak: Math.max(0, habit.streak - 1),
-          lastChecked: null,
-          completionDates: habit.completionDates.filter((date) => date !== today),
-        };
-      }),
-    }));
+          if (!alreadyCompleted) {
+            return {
+              ...habit,
+              streak: habit.streak + 1,
+              lastChecked: new Date().toISOString(),
+              completionDates: [...habit.completionDates, selectedDate],
+            };
+          } else {
+            return {
+              ...habit,
+              streak: Math.max(0, habit.streak - 1),
+              lastChecked: null,
+              completionDates: habit.completionDates.filter(
+                (date) => date !== selectedDate
+              ),
+            };
+          }
+        }),
+      };
+    });
   },
   toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
   deleteHabit: (id) => {
