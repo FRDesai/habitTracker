@@ -8,6 +8,7 @@ import {
     isSameDay,
     isBefore,
   } from 'date-fns';
+  import { useMediaQuery } from 'react-responsive';
   
   export const ContributionHeatmap = ({ completionDates = [], year = 2025 }) => {
     const allDays = eachDayOfInterval({
@@ -57,7 +58,8 @@ import {
       dayCursor = subDays(dayCursor, 1);
     }
   
-    const rows = 3;
+    const isMobile = useMediaQuery({ maxWidth: 640 }); // Tailwind 'sm' breakpoint
+    const rows = isMobile ? 6 : 3;
     const columns = Math.ceil(allDays.length / rows);
     const cells = Array.from({ length: rows }, (_, rowIndex) =>
       allDays.slice(rowIndex * columns, (rowIndex + 1) * columns)
