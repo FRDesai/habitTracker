@@ -15,3 +15,7 @@ body {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
+
+.dark .dark-time-icon::-webkit-calendar-picker-indicator {
+  filter: invert(0.6); /* Makes icon light grey in dark mode */
+}

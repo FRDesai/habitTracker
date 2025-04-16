@@ -115,16 +115,16 @@ export const useStore = create((set) => ({
         "2025-04-14",
         "2025-04-15",
         "2025-04-16"
-    ],
+      ],
+      reminderTime: '07:00'
     },
     {
       id: '2',
       name: 'Morning Run',
-      streak: 15,
       lastChecked: null,
       createdAt: new Date().toISOString(),
+      reminderTime: '07:00',
       completionDates: [
-
         "2025-01-01",
         "2025-01-03",
         "2025-01-04",
@@ -179,6 +179,7 @@ export const useStore = create((set) => ({
       streak: 45,
       lastChecked: null,
       createdAt: new Date().toISOString(),
+      reminderTime: '07:00',
       completionDates: [
         [
           "2025-01-01",
@@ -235,6 +236,7 @@ export const useStore = create((set) => ({
       streak: 95,
       lastChecked: null,
       createdAt: new Date().toISOString(),
+      reminderTime: '07:00',
       completionDates: [
 
         "2024-09-02",
@@ -341,6 +343,7 @@ export const useStore = create((set) => ({
       streak: 200,
       lastChecked: '2025-04-16',
       createdAt: '2025-04-16T00:00:00.000Z',
+      reminderTime: '07:00',
       completionDates: [
         '2025-04-16',
         "2024-06-01",
@@ -556,6 +559,7 @@ export const useStore = create((set) => ({
       streak: 0,
       lastChecked: null,
       createdAt: new Date().toISOString(),
+      reminderTime: '07:00',
       completionDates: [],
     };
     set((state) => ({ habits: [...state.habits, newHabit] }));
