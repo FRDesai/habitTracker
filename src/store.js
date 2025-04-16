@@ -171,11 +171,12 @@ export const useStore = create((set) => ({
         "2025-04-06",
         "2025-04-07",
         "2025-04-10",
-        "2025-04-15"
+        "2025-04-15",
+        '2025-04-16'
+
       ]
       ,
     },
-   
     {
       id: '4',
       name: 'Meditation',
@@ -184,7 +185,7 @@ export const useStore = create((set) => ({
       createdAt: new Date().toISOString(),
       reminderTime: '07:00',
       completionDates: [
-
+        '2025-04-16',
         "2024-09-02",
         "2024-09-03",
         "2024-09-05",
@@ -279,7 +280,8 @@ export const useStore = create((set) => ({
         "2025-04-07",
         "2025-04-09",
         "2025-04-10",
-        "2025-04-12"
+        "2025-04-12",
+
 
       ],
     },
@@ -503,7 +505,7 @@ export const useStore = create((set) => ({
       lastChecked: null,
       createdAt: '2025-04-16T00:00:00.000Z',
       reminderTime: '07:00',
-      completionDates: [      '2025-04-16',],
+      completionDates: ['2025-04-16',],
     },
   ],
   selectedDate: format(new Date(), 'yyyy-MM-dd'),

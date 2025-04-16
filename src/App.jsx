@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, ArrowLeft } from 'lucide-react';
 import { useStore } from './store';
 import { AddHabitForm } from './components/AddHabitForm';
@@ -7,14 +7,15 @@ import { HabitCard } from './components/HabitCard';
 import { WeeklyProgress } from './components/WeeklyProgress';
 import { ContributionHeatmap } from './components/ContributionHeatmap';
 import ReminderModal from './components/ReminderModal';
-import { format } from 'date-fns';
+
+
 
 function App() {
   const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit, selectedDate, setSelectedDate } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
 
   const [showReminder, setShowReminder] = useState(true);
-  
+
 
   useEffect(() => {
     const checkTime = () => {
@@ -37,7 +38,7 @@ function App() {
       });
     };
 
-    const interval = setInterval(checkTime, 60000); 
+    const interval = setInterval(checkTime, 60000);
     return () => clearInterval(interval);
   }, [habits]);
 
@@ -94,20 +95,47 @@ function App() {
             <AddHabitForm onAdd={addHabit} isDarkMode={darkMode} />
 
             <WeeklyProgress isDarkMode={darkMode} onDateSelect={setSelectedDate} />
+            <p className={`text-sm text-left mb-4 px-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+              Viewing habits for{' '}
+              <span className={`${darkMode ? 'text-white' : 'text-black'} font-semibold`}>
+                {new Date(selectedDate).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </span>
+            </p>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedDate} // forces re-render & animation on date change
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="grid gap-4 md:grid-cols-2"
+              >
+                {habits.map((habit) => (
+                  <motion.div
+                    key={habit.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <HabitCard
+                      habit={habit}
+                      onClick={() => setSelectedHabit(habit)}
+                      onToggle={() => toggleHabit(habit.id)}
+                      onDelete={() => deleteHabit(habit.id)}
+                      selectedDate={selectedDate}
+                      isDarkMode={darkMode}
+                    />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
 
-            <div className="grid gap-4 md:grid-cols-2">
-              {habits.map((habit) => (
-                <HabitCard
-                  key={habit.id}
-                  habit={habit}
-                  onClick={() => setSelectedHabit(habit)}
-                  onToggle={()=>toggleHabit(habit.id)}
-                  onDelete={()=> deleteHabit(habit.id)}
-                  selectedDate={selectedDate}
-                  isDarkMode={darkMode}
-                />
-              ))}
-            </div>
 
             {habits.length === 0 && (
               <motion.p
