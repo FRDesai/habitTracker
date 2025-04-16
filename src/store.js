@@ -501,7 +501,7 @@ export const useStore = create((set) => ({
       lastChecked: null,
       createdAt: '2025-04-16T00:00:00.000Z',
       reminderTime: '07:00',
-      completionDates: [],
+      completionDates: [      '2025-04-16',],
     },
   ],
   darkMode: true,

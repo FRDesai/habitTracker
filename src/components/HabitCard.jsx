@@ -1,14 +1,19 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2, Circle, MoreVertical,Trash2 } from 'lucide-react';
+import { CheckCircle2, Circle, MoreVertical, Trash2 } from 'lucide-react';
 import { getLevelInfo } from '../types';
 import { format, subDays, endOfToday } from 'date-fns';
 import { useState } from 'react';
 
-export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode }) => {
+export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode , selectedDate}) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const todayStr = format(endOfToday(), 'yyyy-MM-dd');
   const completionSet = new Set(habit.completionDates || []);
-  const isCheckedToday = completionSet.has(todayStr);
+  const isCheckedToday =
+    selectedDate
+      ? habit.completionDates.includes(selectedDate)
+      : habit.completionDates.includes(format(new Date(), 'yyyy-MM-dd'));
+
+
 
   // === Calculate current streak ===
   let currentStreak = 0;
@@ -30,9 +35,8 @@ export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode }) =>
         scale: 1.01,
         transition: { duration: 0.2 },
       }}
-      className={`relative p-6 rounded-lg shadow-lg ${
-        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-      } transition-colors duration-200`}
+      className={`relative p-6 rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+        } transition-colors duration-200`}
       onClick={onClick}
     >
       {/* Top Right Menu Button */}
@@ -49,9 +53,8 @@ export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode }) =>
 
         {menuOpen && (
           <div
-            className={`absolute right-0 mt-2 w-28 rounded-md shadow-lg z-10 ${
-              isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'
-            }`}
+            className={`absolute right-0 mt-2 w-28 rounded-md shadow-lg z-10 ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-800'
+              }`}
             onClick={(e) => e.stopPropagation()}
           >
             <button

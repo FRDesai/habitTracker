@@ -7,12 +7,14 @@ import { HabitCard } from './components/HabitCard';
 import { WeeklyProgress } from './components/WeeklyProgress';
 import { ContributionHeatmap } from './components/ContributionHeatmap';
 import ReminderModal from './components/ReminderModal';
+import { format } from 'date-fns';
 
 function App() {
   const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
 
   const [showReminder, setShowReminder] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
   useEffect(() => {
     const checkTime = () => {
@@ -91,7 +93,7 @@ function App() {
 
             <AddHabitForm onAdd={addHabit} isDarkMode={darkMode} />
 
-            <WeeklyProgress isDarkMode={darkMode} />
+            <WeeklyProgress isDarkMode={darkMode} onDateSelect={setSelectedDate} />
 
             <div className="grid gap-4 md:grid-cols-2">
               {habits.map((habit) => (
@@ -101,6 +103,7 @@ function App() {
                   onClick={() => setSelectedHabit(habit)}
                   onToggle={()=>toggleHabit(habit.id)}
                   onDelete={()=> deleteHabit(habit.id)}
+                  selectedDate={selectedDate}
                   isDarkMode={darkMode}
                 />
               ))}
