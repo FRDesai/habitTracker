@@ -545,4 +545,9 @@ export const useStore = create((set) => ({
     }));
   },
   toggleDarkMode: () => set((state) => ({ darkMode: !state.darkMode })),
+  deleteHabit: (id) => {
+    set((state) => ({
+      habits: state.habits.filter((habit) => habit.id !== id),
+    }));
+  },
 }));

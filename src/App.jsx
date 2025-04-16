@@ -9,7 +9,7 @@ import { ContributionHeatmap } from './components/ContributionHeatmap';
 import ReminderModal from './components/ReminderModal';
 
 function App() {
-  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode } = useStore();
+  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
 
   const [showReminder, setShowReminder] = useState(true);
@@ -100,6 +100,7 @@ function App() {
                   habit={habit}
                   onClick={() => setSelectedHabit(habit)}
                   onToggle={()=>toggleHabit(habit.id)}
+                  onDelete={()=> deleteHabit(habit.id)}
                   isDarkMode={darkMode}
                 />
               ))}
