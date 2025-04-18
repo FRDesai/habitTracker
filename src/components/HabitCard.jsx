@@ -54,6 +54,7 @@ export const HabitCard = ({
         y: -1,
         scale: 1.01,
         transition: { duration: 0.2 },
+        cursor: "pointer"
       }}
       className={`relative p-6 rounded-lg shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'} transition-colors duration-200`}
       onClick={onClick}

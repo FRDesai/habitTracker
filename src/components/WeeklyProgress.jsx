@@ -52,7 +52,7 @@ export const WeeklyProgress = ({ isDarkMode, onDateSelect }) => {
                   trailColor: isDarkMode ? '#4b5563' : '#e5e7eb',
                 })}
               >
-                {percentage === 100 && <span role="img" aria-label="fire">🔥</span>}
+                {percentage === 100 && <span role="img" aria-label="fire" title="Completed all the habits of the day">🔥</span>}
               </CircularProgressbarWithChildren>
             </div>
           </div>
