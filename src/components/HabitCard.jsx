@@ -60,7 +60,7 @@ export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode , sel
                 onDelete(habit.id);
                 setMenuOpen(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-red-500 hover:text-white w-full"
+              className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-red-500 hover:text-white rounded-md  w-full"
             >
               <Trash2 className="w-4 h-4" />
               Delete
