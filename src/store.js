@@ -509,18 +509,17 @@ export const useStore = create((set) => ({
     },
   ],
   selectedDate: format(new Date(), 'yyyy-MM-dd'),
-
   setSelectedDate: (date) => set(() => ({ selectedDate: date })),
   darkMode: true,
-  addHabit: (name) => {
+  addHabit: (habit) => {
     const newHabit = {
       id: Date.now().toString(),
-      name,
-      streak: 0,
-      lastChecked: null,
+      name: habit.name,
+      streak: habit.streak,
+      lastChecked: habit.lastChecked,
       createdAt: new Date().toISOString(),
-      reminderTime: '07:00',
-      completionDates: [],
+      reminderTime: habit.reminderTime,
+      completionDates: habit.completionDates,
     };
     set((state) => ({ habits: [...state.habits, newHabit] }));
   },
