@@ -11,11 +11,10 @@ import ReminderModal from './components/ReminderModal';
 
 
 function App() {
-  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit, selectedDate, setSelectedDate } = useStore();
+  const { habits, darkMode, addHabit, toggleHabit, toggleDarkMode, deleteHabit, selectedDate, setSelectedDate, editHabit } = useStore();
   const [selectedHabit, setSelectedHabit] = useState(null);
-
-  const [showReminder, setShowReminder] = useState(true);
-
+  const [showReminder, setShowReminder] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const checkTime = () => {
@@ -55,7 +54,7 @@ function App() {
         />
       )}
       <div className="container mx-auto px-4 py-8 max-w-3xl">
-        {selectedHabit ? (
+        {!isEditing && selectedHabit ? (
           <div>
             <button
               className={`mb-4 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-800'
@@ -125,9 +124,15 @@ function App() {
                   >
                     <HabitCard
                       habit={habit}
-                      onClick={() => setSelectedHabit(habit)}
+                      onClick={() => {
+                        isEditing ? null :
+                          setSelectedHabit(habit)
+                      }}
                       onToggle={() => toggleHabit(habit.id)}
                       onDelete={() => deleteHabit(habit.id)}
+                      isEditing={isEditing}
+                      setIsEditing={setIsEditing}
+                      editHabit={editHabit}
                       selectedDate={selectedDate}
                       isDarkMode={darkMode}
                     />

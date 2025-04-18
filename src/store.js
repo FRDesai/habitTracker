@@ -560,4 +560,17 @@ export const useStore = create((set) => ({
       habits: state.habits.filter((habit) => habit.id !== id),
     }));
   },
+  editHabit: (id, updatedData) => {
+    set((state) => ({
+      habits: state.habits.map((habit) =>
+        habit.id === id
+          ? {
+            ...habit,
+            name: updatedData.name ?? habit.name,
+            reminderTime: updatedData.reminderTime ?? habit.reminderTime,
+          }
+          : habit
+      ),
+    }));
+  },
 }));
