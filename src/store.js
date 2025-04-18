@@ -116,7 +116,8 @@ export const useStore = create((set) => ({
         "2025-04-13",
         "2025-04-14",
         "2025-04-15",
-        "2025-04-16"
+        "2025-04-16",
+        "2025-04-17"
       ],
       reminderTime: '07:00'
     },
@@ -125,7 +126,7 @@ export const useStore = create((set) => ({
       name: 'Morning Run',
       lastChecked: null,
       createdAt: new Date().toISOString(),
-      reminderTime: '22:38',
+      reminderTime: '06:00',
       completionDates: [
         "2025-01-01",
         "2025-01-03",
@@ -172,7 +173,9 @@ export const useStore = create((set) => ({
         "2025-04-07",
         "2025-04-10",
         "2025-04-15",
-        '2025-04-16'
+        '2025-04-16',
+        "2025-04-17",
+        
 
       ]
       ,
@@ -281,7 +284,7 @@ export const useStore = create((set) => ({
         "2025-04-09",
         "2025-04-10",
         "2025-04-12",
-
+        "2025-04-17"
 
       ],
     },
@@ -291,7 +294,7 @@ export const useStore = create((set) => ({
       streak: 200,
       lastChecked: '2025-04-16',
       createdAt: '2025-04-16T00:00:00.000Z',
-      reminderTime: '07:00',
+      reminderTime: '23:00',
       completionDates: [
         '2025-04-16',
         "2024-06-01",
@@ -493,19 +496,18 @@ export const useStore = create((set) => ({
         "2025-04-09",
         "2025-04-11",
         "2025-04-14",
-        "2025-04-15"
-
+        "2025-04-15",
+      "2025-04-17"
 
       ],
     },
-
     {
       id: '6',
       name: 'Go Swimming',
       lastChecked: null,
       createdAt: '2025-04-16T00:00:00.000Z',
-      reminderTime: '07:00',
-      completionDates: ['2025-04-16',],
+      reminderTime: '11:00',
+      completionDates: ['2025-04-16',      "2025-04-17"],
     },
   ],
   selectedDate: format(new Date(), 'yyyy-MM-dd'),
