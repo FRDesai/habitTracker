@@ -4,7 +4,7 @@ import { getLevelInfo } from '../types';
 import { format, subDays, endOfToday } from 'date-fns';
 import { useState } from 'react';
 
-export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode , selectedDate}) => {
+export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode, selectedDate }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const todayStr = format(endOfToday(), 'yyyy-MM-dd');
   const completionSet = new Set(habit.completionDates || []);
@@ -71,13 +71,21 @@ export const HabitCard = ({ habit, onToggle, onDelete, onClick, isDarkMode , sel
 
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-semibold mb-2">{habit.name}</h3>
-          <p className={`text-sm ${color}`}>{title}</p>
+          <h3 className="text-xl font-semibold mb-2" title="Habit name">{habit.name}</h3>
+          <p className={`text-sm ${color}`} title="award">{title}</p>
           <p className="text-sm mt-1">
             Current streak:{' '}
             <span className="font-bold">
               {currentStreak} day{currentStreak !== 1 && 's'} {currentStreak > 3 && '🔥'}
             </span>
+
+          </p>
+          <p>
+            {habit.reminderTime && (
+              <span className=" text-xs text-gray-500"      title="Reminder time">
+                ⏰ {habit.reminderTime}
+              </span>
+            )}
           </p>
         </div>
         <motion.button
